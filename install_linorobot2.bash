@@ -353,7 +353,7 @@ if [[ "$BASE" != "ci" ]]
         read reply
         if [[ "$reply" == "y" || "$reply" == "Y" ]]
             then
-                echo "source \${WORKSPACE}/install/setup.bash" >> ~/.bashrc
+                echo "source ${WORKSPACE}/install/setup.bash" >> ~/.bashrc
         else
             echo
             echo "Remember to run $ source \${WORKSPACE}/install/setup.bash every time you open a terminal."

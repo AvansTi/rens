@@ -264,7 +264,7 @@ if [[ "$BASE" != "ci" ]]
         echo "DEPTH SENSOR : $DEPTH_SENSOR"
         echo
         echo "This installer will edit your ~/.bashrc."
-        echo "Create a linorobot2_ws on your $HOME directory."
+        echo "Create a rens_ws on your $HOME directory."
         echo "Install linorobot2 ROS2 dependencies."
         echo "Install udev rules on /etc/udev/rules.d folder."
         echo -n "Enter [y] to continue. " 

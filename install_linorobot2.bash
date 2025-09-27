@@ -320,7 +320,7 @@ source $WORKSPACE/install/setup.bash
 
 #### 2.1 Download linorobot2:
 cd $WORKSPACE
-git clone -b $ROS_DISTRO https://github.com/linorobot/linorobot2 src/linorobot2
+git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/linorobot2
 
 #### 2.2 Ignore Gazebo Packages on robot computer (optional)
 cd $WORKSPACE/src/linorobot2/linorobot2_gazebo
@@ -348,15 +348,15 @@ if [[ "$BASE" != "ci" ]]
             echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
         fi
         echo
-        echo "Do you want to add sourcing of linorobot2_ws on your ~/.bashrc?"
+        echo "Do you want to add sourcing of rens_ws on your ~/.bashrc?"
         echo -n "Yes [y] or No [n]: " 
         read reply
         if [[ "$reply" == "y" || "$reply" == "Y" ]]
             then
-                echo "source \$HOME/linorobot2_ws/install/setup.bash" >> ~/.bashrc
+                echo "source \${WORKSPACE}/install/setup.bash" >> ~/.bashrc
         else
             echo
-            echo "Remember to run $ source ~/linorobot2_ws/install/setup.bash every time you open a terminal."
+            echo "Remember to run $ source \${WORKSPACE}/install/setup.bash every time you open a terminal."
         fi
 fi
 

@@ -1,9 +1,11 @@
-# linorobot2
+# REnS (Avans specific implementation of LinoRobot2)
 ![linorobot2](docs/linorobot2.gif)
 
-linorobot2 is a ROS2 port of the [linorobot](https://github.com/linorobot/linorobot) package. If you're planning to build your own custom ROS2 robot (2WD, 4WD, Mecanum Drive) using accessible parts, then this package is for you. This repository contains launch files to easily integrate your DIY robot with Nav2 and a simulation pipeline to run and verify your experiments on a virtual robot in Gazebo. 
+This repository is a fork of the linorobot2 repository. linorobot2 is a ROS2 port of the [linorobot](https://github.com/linorobot2/linorobot2) package. If you're planning to build your own custom ROS2 robot (2WD, 4WD, Mecanum Drive) using accessible parts, then that package is for you. This repository contains launch files to easily build, run and modify the Avans REnS robot with Nav2 and a simulation pipeline to run and verify your experiments on a virtual robot in Gazebo. 
 
-Once the robot's URDF has been configured in linorobot2_description package, users can easily switch between booting up the physical robot and spawning the virtual robot in Gazebo. 
+The robot's URDF has been configured in linorobot2_description package, users can easily switch between booting up the physical robot and spawning the virtual robot in Gazebo. 
+
+This repository is still Work In Progress. A lot of changes need to be made to make this an "Official" REnS version based on LinoRobot2.
 
 ![linorobot2_architecture](docs/linorobot2_launchfiles.png)
 
@@ -89,10 +91,10 @@ Set LINOROBOT2_BASE env variable to the type of robot base used. Available env v
 You can skip the next step (Host Machine - RVIZ Configurations) since this package already contains the same RVIZ configurations to visualize the robot. 
 
 ### 3. Host Machine - RVIZ Configuration
-Install [linorobot2_viz](https://github.com/linorobot/linorobot2_viz) package to visualize the robot remotely specifically when creating a map or initializing/sending goal poses to the robot. The package has been separated to minimize the installation required if you're not using the simulation tools on the host machine.
+Install [linorobot2_viz](https://github.com/AvansTI/rens_viz) package to visualize the robot remotely specifically when creating a map or initializing/sending goal poses to the robot. The package has been separated to minimize the installation required if you're not using the simulation tools on the host machine.
 
     cd <host_machine_ws>
-    git clone https://github.com/linorobot/linorobot2_viz src/linorobot2_viz
+    git clone https://github.com/AvansTI/rens_viz linorobot2_viz
     rosdep update && rosdep install --from-path src --ignore-src -y 
     colcon build
     source install/setup.bash
@@ -108,7 +110,7 @@ Be sure to follow the post-install instructions.
 You might need to customize the docker/.env file if for example, you want to change the default robot type.
 Build the docker image:
 
-    git clone https://github.com/linorobot/linorobot2.git
+    git clone https://github.com/AvansTi/rens.git
     cd linorobot2/docker
     docker compose build
 
@@ -116,7 +118,7 @@ If you get a "permission denied" error running docker, follow the steps in the [
 so that you don't have to use sudo to run docker commands.
 
 ## Hardware and Robot Firmware
-All the hardware documentation and robot microcontroller's firmware can be found [here](https://github.com/linorobot/linorobot2_hardware).
+All the hardware documentation and robot microcontroller's firmware can be found [here](https://github.com/AvansTi/rens_hardware).
 
 ## URDF
 ### 1. Define robot properties

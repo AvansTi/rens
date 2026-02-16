@@ -23,11 +23,11 @@ from launch.conditions import IfCondition
 
 def generate_launch_description():
     sensors_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'sensors.launch.py']
     )
 
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('rens_description'), 'launch', 'description.launch.py']
     )
 
     return LaunchDescription([

@@ -1,6 +1,6 @@
 services:   
   base:
-    image: linorobot2-${DEPLOY}:${USE_ROS_DISTRO}
+    image: rens-${DEPLOY}:${USE_ROS_DISTRO}
     build:
       context: ../
       dockerfile: docker/Dockerfile
@@ -17,8 +17,8 @@ services:
 
   dev:
     runtime: ${RUNTIME}
-    image: linorobot2-${DEPLOY}:${USE_ROS_DISTRO}
-    hostname: linorobot2-${USE_ROS_DISTRO}
+    image: rens-${DEPLOY}:${USE_ROS_DISTRO}
+    hostname: rens-${USE_ROS_DISTRO}
     stdin_open: true
     tty: true
     network_mode: host
@@ -35,14 +35,14 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - $HOME/.Xauthority:/root/.Xauthority
-      - ../linorobot2_navigation/maps:/root/linorobot2_ws/src/linorobot2/linorobot2_navigation/maps:rw)
+      - ../rens_navigation/maps:/root/rens_ws/src/rens/rens_navigation/maps:rw)
 
   gazebo:
     container_name: gazebo
     extends: dev
     command: > 
-      ros2 launch linorobot2_gazebo gazebo.launch.py 
-      world:=/root/linorobot2_ws/install/linorobot2_gazebo/share/linorobot2_gazebo/worlds/${WORLD:-turtlebot3_world}.sdf
+      ros2 launch rens_gazebo gazebo.launch.py 
+      world:=/root/rens_ws/install/rens_gazebo/share/rens_gazebo/worlds/${WORLD:-turtlebot3_world}.sdf
       spawn_x:=${SPAWN_X:-0.5}
       spawn_y:=${SPAWN_Y:-0.0}
       spawn_yaw:=${SPAWN_Z:-0.0}
@@ -53,7 +53,7 @@ services:
     container_name: bringup
     extends: dev
     command: >
-      ros2 launch linorobot2_bringup bringup.launch.py 
+      ros2 launch rens_bringup bringup.launch.py 
       custom_robot:=${CUSTOM_ROBOT}
       extra:=${LAUNCH_EXTRA} 
       odom_topic:=${ODOM_TOPIC}
@@ -66,7 +66,7 @@ services:
     container_name: slam
     extends: dev
     command: >
-      ros2 launch linorobot2_navigation slam.launch.py
+      ros2 launch rens_navigation slam.launch.py
       rviz:=${RVIZ:-false}
       sim:=${SIM:-false}
 
@@ -74,8 +74,8 @@ services:
     container_name: navigate
     extends: dev
     command: >
-      ros2 launch linorobot2_navigation navigation.launch.py
-      map:=/root/linorobot2_ws/src/linorobot2/linorobot2_navigation/maps/${WORLD:-turtlebot3_world}.yaml
+      ros2 launch rens_navigation navigation.launch.py
+      map:=/root/rens_ws/src/rens/rens_navigation/maps/${WORLD:-turtlebot3_world}.yaml
       rviz:=${RVIZ:-false}
       sim:=${SIM:-false}
 
@@ -84,14 +84,14 @@ services:
     extends: dev
     command: >
       ros2 run nav2_map_server map_saver_cli 
-      -f /root/linorobot2_ws/src/linorobot2/linorobot2_navigation/maps/map
+      -f /root/rens_ws/src/rens/rens_navigation/maps/map
       --fmt png
       --ros-args -p save_map_timeout:=10000.
 
   rviz-nav:
     container_name: rviz-nav
     extends: dev
-    command: rviz2 -d /root/linorobot2_ws/src/linorobot2/linorobot2_navigation/rviz/linorobot2_navigation.rviz
+    command: rviz2 -d /root/rens_ws/src/rens/rens_navigation/rviz/rens_navigation.rviz
 
   rviz:
     container_name: rviz
@@ -103,7 +103,7 @@ services:
     extends: dev
     command: sleep infinity
     volumes:
-    - ../.:/root/linorobot2_ws/src/linorobot2
+    - ../.:/root/rens_ws/src/rens
 
   webtop:
     container_name: webtop

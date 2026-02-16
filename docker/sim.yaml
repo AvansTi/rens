@@ -1,4 +1,4 @@
-name: linorobot2-sim-demo
+name: rens-sim-demo
 on_project_start: 
 - export DISPLAY=:200
 - export WORLD=turtlebot3_world

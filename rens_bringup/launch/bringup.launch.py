@@ -23,31 +23,31 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
     sensors_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'sensors.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'sensors.launch.py']
     )
 
     joy_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'joy_teleop.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'joy_teleop.launch.py']
     )
 
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('rens_description'), 'launch', 'description.launch.py']
     )
 
     ekf_config_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_base"), "config", "ekf.yaml"]
+        [FindPackageShare("rens_base"), "config", "ekf.yaml"]
     )
 
     default_robot_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'default_robot.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'default_robot.launch.py']
     )
 
     custom_robot_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'custom_robot.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'custom_robot.launch.py']
     )
 
     extra_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'extra.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'extra.launch.py']
     )
 
     return LaunchDescription([

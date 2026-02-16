@@ -1,4 +1,4 @@
-## Manual installation of linorobot2 package on robot computer
+## Manual installation of rens package on robot computer
 
 ### 1. Install micro-ROS and its dependencies
 
@@ -92,28 +92,28 @@ OAK-D Camera:
 
 * You can ignore `1 package had stderr output: microxrcedds_agent` after building your workspace. 
 
-### 2. Download linorobot2 and its dependencies:
+### 2. Download rens and its dependencies:
 
-#### 2.1 Download linorobot2:
+#### 2.1 Download rens:
 
     cd <your_ws> 
-    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/linorobot2
+    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/rens
 
 #### 2.2 Ignore Gazebo Packages on robot computer (optional)
 
-If you're installing this on the robot's computer or you don't need to run Gazebo at all, you can skip linorobot2_gazebo package by creating a COLCON_IGNORE file:
+If you're installing this on the robot's computer or you don't need to run Gazebo at all, you can skip rens_gazebo package by creating a COLCON_IGNORE file:
 
-    cd src/linorobot2/linorobot2_gazebo
+    cd src/rens/rens_gazebo
     touch COLCON_IGNORE
 
-#### 2.3 Install linorobot2 package:
+#### 2.3 Install rens package:
     
     cd <your_ws>
     rosdep update && rosdep install --from-path src --ignore-src -y --skip-keys microxrcedds_agent
     colcon build
     source install/setup.bash
 
-* microxrcedds_agent dependency checks are skipped to prevent this [issue](https://github.com/micro-ROS/micro_ros_setup/issues/138) of finding its keys. This means that you have to always add `--skip-keys microxrcedds_agent` whenever you have to run `rosdep install` on the ROS2 workspace where you installed linorobot2.
+* microxrcedds_agent dependency checks are skipped to prevent this [issue](https://github.com/micro-ROS/micro_ros_setup/issues/138) of finding its keys. This means that you have to always add `--skip-keys microxrcedds_agent` whenever you have to run `rosdep install` on the ROS2 workspace where you installed rens.
 
 ## ENV Variables
 ### 1. Robot Type
@@ -209,7 +209,7 @@ and paste the following:
     [Service]
     Type=simple
     User=<user>
-    ExecStart=/bin/sh -c ". /opt/ros/<your_ros_distro>/setup.sh;. /etc/ros/env.sh;. /home/<user>/<your_ws>/install/setup.sh; ros2 launch linorobot2_bringup bringup.launch.py joy:=true"
+    ExecStart=/bin/sh -c ". /opt/ros/<your_ros_distro>/setup.sh;. /etc/ros/env.sh;. /home/<user>/<your_ws>/install/setup.sh; ros2 launch rens_bringup bringup.launch.py joy:=true"
 
     [Install]
     WantedBy=multi-user.target
@@ -217,7 +217,7 @@ and paste the following:
 Remember to replace:
 - `user` with your machine's user name (`echo $USER`)
 - `your_ros_distro` with the ros2 distro (`echo $ROS_DISTRO`) your machine is running on
-- `your_ws` with the location of the ros2 ws where you installed linorobot2
+- `your_ws` with the location of the ros2 ws where you installed rens
 
 ### 2.3 Enable the service
 

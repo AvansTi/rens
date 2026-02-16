@@ -7,7 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
     robot_base = os.getenv('RENS2_BASE')
 
-    package_name = 'linorobot2_description'
+    package_name = 'rens_description'
 
     pkg_share = launch_ros.substitutions.FindPackageShare(package=package_name).find(package_name)
     

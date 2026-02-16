@@ -21,7 +21,7 @@ DEPTH_SENSOR=$3
 ARCH="$(uname -m)"
 ROSDISTRO=$4
 
-WORKSPACE="/root/linorobot2_ws"
+WORKSPACE="/root/rens_ws"
 
 ROBOT_TYPE_ARRAY=(2wd 4wd mecanum)
 DEPTH_SENSOR_ARRAY=(realsense zed zedm zed2 zed2i oakd oakdlite oakdpro)

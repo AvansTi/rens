@@ -25,7 +25,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     zed_sensors = ['zed', 'zed2', 'zed2i', 'zedm']
     zed_common_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'config', 'zed_common.yaml']
+        [FindPackageShare('rens_bringup'), 'config', 'zed_common.yaml']
     )
 
     oakd_sensors = ['oakd', 'oakdlite', 'oakdpro']

@@ -127,14 +127,14 @@ ENV RMW_IMPLEMENTATION=rmw_${RMW}_cpp
 ENV CYCLONEDDS_URI=/root/.cyclonedds.xml
 ENV FASTRTPS_DEFAULT_PROFILES_FILE=/root/.fastrtps.xml
 
-RUN mkdir -p /root/linorobot2_ws/src/linorobot2
+RUN mkdir -p /root/rens_ws/src/rens
 RUN mkdir -p /root/preinstall/base \
     /root/preinstall/description \
     /root/preinstall/navigation 
 
-COPY ./linorobot2_base/package.xml /root/preinstall/base
-COPY ./linorobot2_description/package.xml /root/preinstall/description
-COPY ./linorobot2_navigation/package.xml /root/preinstall/navigation
+COPY ./rens_base/package.xml /root/preinstall/base
+COPY ./rens_description/package.xml /root/preinstall/description
+COPY ./rens_navigation/package.xml /root/preinstall/navigation
 
 RUN apt-get update \
         && rosdep update --rosdistro=${ROS_DISTRO} \
@@ -153,7 +153,7 @@ FROM common AS hardware
 SHELL ["/bin/bash", "-c"]
 
 RUN mkdir -p /root/preinstall/bringup
-COPY ./linorobot2_bringup/package.xml /root/preinstall/bringup
+COPY ./rens_bringup/package.xml /root/preinstall/bringup
 
 RUN apt-get update \
         && rosdep update --rosdistro=${ROS_DISTRO} \
@@ -171,7 +171,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \  
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root/linorobot2_ws
+WORKDIR /root/rens_ws
 RUN git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
 RUN apt-get update \
         && rosdep update --rosdistro=${ROS_DISTRO} \
@@ -182,11 +182,11 @@ RUN source /opt/ros/$ROS_DISTRO/setup.bash \
     && colcon build --packages-select micro_ros_setup
 
 RUN source /opt/ros/$ROS_DISTRO/setup.bash  \
-    && source /root/linorobot2_ws/install/setup.bash \
+    && source /root/rens_ws/install/setup.bash \
     && ros2 run micro_ros_setup create_agent_ws.sh
 
 RUN source /opt/ros/$ROS_DISTRO/setup.bash \
-    && source /root/linorobot2_ws/install/setup.bash \
+    && source /root/rens_ws/install/setup.bash \
     && ros2 run micro_ros_setup build_agent.sh
 
 RUN source /opt/ros/$ROS_DISTRO/setup.bash \
@@ -207,7 +207,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # RUN rm -rf /root/.gazebo/models/.git
 
 # RUN mkdir -p /root/preinstall/gazebo
-# COPY ./linorobot2_gazebo/package.xml /root/preinstall/gazebo
+# COPY ./rens_gazebo/package.xml /root/preinstall/gazebo
 # RUN apt-get update \
 #         && rosdep update --rosdistro=${ROS_DISTRO} \
 #         && rosdep install --rosdistro=${ROS_DISTRO} --from-paths /root/preinstall -iry --os=ubuntu:$(lsb_release -sc) \
@@ -216,16 +216,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 FROM ${DEPLOY:-simulation} AS base
 SHELL ["/bin/bash", "-c"]
 
-COPY . /root/linorobot2_ws/src/linorobot2
+COPY . /root/rens_ws/src/rens
 
 ARG DEPLOY=
 RUN if [ ${DEPLOY} == "hardware" ]; then \
-        touch /root/linorobot2_ws/src/linorobot2/linorobot2_gazebo/COLCON_IGNORE; \
+        touch /root/rens_ws/src/rens/rens_gazebo/COLCON_IGNORE; \
     elif [ ${DEPLOY} == "simulation" ]; then \
-        touch /root/linorobot2_ws/src/linorobot2/linorobot2_bringup/COLCON_IGNORE; \
+        touch /root/rens_ws/src/rens/rens_bringup/COLCON_IGNORE; \
     fi
 
-WORKDIR /root/linorobot2_ws
+WORKDIR /root/rens_ws
 RUN source /opt/ros/$ROS_DISTRO/setup.bash \
     && colcon build
 

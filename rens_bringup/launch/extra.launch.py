@@ -23,11 +23,11 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
 
     laser_filter_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'config', 'box_laser_filter.yaml']
+        [FindPackageShare('rens_bringup'), 'config', 'box_laser_filter.yaml']
     )
 
     laser_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'lasers.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'lasers.launch.py']
     )
 
     return LaunchDescription([

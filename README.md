@@ -1,31 +1,31 @@
 # REnS (Avans specific implementation of LinoRobot2)
-![linorobot2](docs/linorobot2.gif)
+![rens](docs/rens.gif)
 
-This repository is a fork of the linorobot2 repository. linorobot2 is a ROS2 port of the [linorobot](https://github.com/linorobot2/linorobot2) package. If you're planning to build your own custom ROS2 robot (2WD, 4WD, Mecanum Drive) using accessible parts, then that package is for you. This repository contains launch files to easily build, run and modify the Avans REnS robot with Nav2 and a simulation pipeline to run and verify your experiments on a virtual robot in Gazebo. 
+This repository is a fork of the rens repository. rens is a ROS2 port of the [linorobot](https://github.com/rens/rens) package. If you're planning to build your own custom ROS2 robot (2WD, 4WD, Mecanum Drive) using accessible parts, then that package is for you. This repository contains launch files to easily build, run and modify the Avans REnS robot with Nav2 and a simulation pipeline to run and verify your experiments on a virtual robot in Gazebo. 
 
-The robot's URDF has been configured in linorobot2_description package, users can easily switch between booting up the physical robot and spawning the virtual robot in Gazebo. 
+The robot's URDF has been configured in rens_description package, users can easily switch between booting up the physical robot and spawning the virtual robot in Gazebo. 
 
 This repository is still Work In Progress. A lot of changes need to be made to make this an "Official" REnS version based on LinoRobot2.
 
-![linorobot2_architecture](docs/linorobot2_launchfiles.png)
+![rens_architecture](docs/rens_launchfiles.png)
 
-Assuming you're using one of the tested sensors, linorobot2 automatically launches the necessary hardware drivers, with the topics being conveniently matched with the topics available in Gazebo. This allows users to define parameters for high level applications (ie. Nav2 SlamToolbox, AMCL) that are common to both virtual and physical robots.
+Assuming you're using one of the tested sensors, rens automatically launches the necessary hardware drivers, with the topics being conveniently matched with the topics available in Gazebo. This allows users to define parameters for high level applications (ie. Nav2 SlamToolbox, AMCL) that are common to both virtual and physical robots.
 
 The image below summarizes the topics available after running **bringup.launch.py**.
-![linorobot2_microcontroller](docs/microcontroller_architecture.png)
+![rens_microcontroller](docs/microcontroller_architecture.png)
 
-An in-depth tutorial on how to build the robot is available in [linorobot2_hardware](https://github.com/AvansTI/rens_hardware).
+An in-depth tutorial on how to build the robot is available in [rens_hardware](https://github.com/AvansTI/rens_hardware).
 
 ## Installation 
 This package requires ros-jazzy. If you haven't installed ROS2 yet, you can use this [installer](https://github.com/linorobot/ros2me) script that has been tested to work on x86 and ARM based dev boards ie. Raspberry Pi4/Nvidia Jetson Series. 
 
-### 1. Robot Computer - linorobot2 Package
-The easiest way to install this package on the robot computer is to run the bash script found in this package's root directory. It will install all the dependencies, set the ENV variables for the robot base and sensors, and create a linorobot2_ws (robot_computer_ws) on the robot computer's `$HOME` directory. If you're using a ZED camera with a Jetson Nano, you must create a custom Ubuntu 20.04 image for CUDA and the GPU driver to work. Here's a quick [guide](./ROBOT_INSTALLATION.md#1-creating-jetson-nano-image) on how to create a custom image for Jetson Nano.
+### 1. Robot Computer - rens Package
+The easiest way to install this package on the robot computer is to run the bash script found in this package's root directory. It will install all the dependencies, set the ENV variables for the robot base and sensors, and create a rens_ws (robot_computer_ws) on the robot computer's `$HOME` directory. If you're using a ZED camera with a Jetson Nano, you must create a custom Ubuntu 20.04 image for CUDA and the GPU driver to work. Here's a quick [guide](./ROBOT_INSTALLATION.md#1-creating-jetson-nano-image) on how to create a custom image for Jetson Nano.
 
     source /opt/ros/<ros_distro>/setup.bash
     cd /tmp
-    wget https://raw.githubusercontent.com/linorobot/linorobot2/${ROS_DISTRO}/install_linorobot2.bash
-    bash install_linorobot2.bash <robot_type> <laser_sensor> <depth_sensor>
+    wget https://raw.githubusercontent.com/linorobot/rens/${ROS_DISTRO}/install_rens.bash
+    bash install_rens.bash <robot_type> <laser_sensor> <depth_sensor>
     source ~/.bashrc
 
 robot_type:
@@ -71,16 +71,16 @@ Alternatively, follow this [guide](./ROBOT_INSTALLATION.md) to do the installati
 ### 2. Host Machine / Development Computer - Gazebo Simulation (Optional)
 This step is only required if you plan to use Gazebo later. This comes in handy if you want to fine-tune parameters (ie. SLAM Toolbox, AMCL, Nav2) or test your applications on a virtual robot. 
 
-#### 2.1 Install linorobot2 Package
-Install linorobot2 package on the host machine:
+#### 2.1 Install rens Package
+Install rens package on the host machine:
 
     cd <host_machine_ws>
-    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/linorobot2
+    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/rens
     rosdep update && rosdep install --from-path src --ignore-src -y --skip-keys microxrcedds_agent --skip-keys micro_ros_agent
     colcon build
     source install/setup.bash
 
-* microxrcedds_agent and micro_ros_agent dependency checks are skipped to prevent this [issue](https://github.com/micro-ROS/micro_ros_setup/issues/138) of finding its keys. This means that you have to always add `--skip-keys microxrcedds_agent --skip-keys micro_ros_agent` whenever you have to run `rosdep install` on the ROS2 workspace where you installed linorobot2. 
+* microxrcedds_agent and micro_ros_agent dependency checks are skipped to prevent this [issue](https://github.com/micro-ROS/micro_ros_setup/issues/138) of finding its keys. This means that you have to always add `--skip-keys microxrcedds_agent --skip-keys micro_ros_agent` whenever you have to run `rosdep install` on the ROS2 workspace where you installed rens. 
 
 #### 2.2 Define Robot Type
 Set RENS2_BASE env variable to the type of robot base used. Available env variables are *2wd*, *4wd*, and *mecanum*. For example:
@@ -91,16 +91,16 @@ Set RENS2_BASE env variable to the type of robot base used. Available env variab
 You can skip the next step (Host Machine - RVIZ Configurations) since this package already contains the same RVIZ configurations to visualize the robot. 
 
 ### 3. Host Machine - RVIZ Configuration
-Install [linorobot2_viz](https://github.com/AvansTI/rens_viz) package to visualize the robot remotely specifically when creating a map or initializing/sending goal poses to the robot. The package has been separated to minimize the installation required if you're not using the simulation tools on the host machine.
+Install [rens_viz](https://github.com/AvansTI/rens_viz) package to visualize the robot remotely specifically when creating a map or initializing/sending goal poses to the robot. The package has been separated to minimize the installation required if you're not using the simulation tools on the host machine.
 
     cd <host_machine_ws>
-    git clone https://github.com/AvansTI/rens_viz linorobot2_viz
+    git clone https://github.com/AvansTI/rens_viz rens_viz
     rosdep update && rosdep install --from-path src --ignore-src -y 
     colcon build
     source install/setup.bash
 
 ### 4. Docker Configuration
-Docker can be used to run linorobot2 on a host machine for simulation. This can be useful if you aren't
+Docker can be used to run rens on a host machine for simulation. This can be useful if you aren't
 running Ubuntu 24.04 with ROS-Jazzy installed.
 
 If you don't already have docker installed, you can install it
@@ -111,7 +111,7 @@ You might need to customize the docker/.env file if for example, you want to cha
 Build the docker image:
 
     git clone https://github.com/AvansTi/rens.git
-    cd linorobot2/docker
+    cd rens/docker
     docker compose build
 
 If you get a "permission denied" error running docker, follow the steps in the [docker post install instructions](https://docs.docker.com/engine/install/linux-postinstall/) to add yourself to the docker group,
@@ -122,9 +122,9 @@ All the hardware documentation and robot microcontroller's firmware can be found
 
 ## URDF
 ### 1. Define robot properties
-[linorobot2_description](./linorobot2_description) package has parameterized xacro files that can help you kickstart writing the robot's URDF. Open <robot_type>.properties.urdf.xacro in [linorobot2_description/urdf](./linorobot2_description/urdf) directory and change the values according to the robot's specification/dimensions. All pose definitions must be measured from the `base_link` (center of base) and wheel positions (ie `wheel_pos_x`) are referring to wheel 1.
+[rens_description](./rens_description) package has parameterized xacro files that can help you kickstart writing the robot's URDF. Open <robot_type>.properties.urdf.xacro in [rens_description/urdf](./rens_description/urdf) directory and change the values according to the robot's specification/dimensions. All pose definitions must be measured from the `base_link` (center of base) and wheel positions (ie `wheel_pos_x`) are referring to wheel 1.
 
-For custom URDFs, you can change the `urdf_path` in [description.launch.py](./linorobot2_description/launch/description.launch.py) found in linorobot2_description/launch directory. 
+For custom URDFs, you can change the `urdf_path` in [description.launch.py](./rens_description/launch/description.launch.py) found in rens_description/launch directory. 
 
 Robot Orientation:
 
@@ -149,18 +149,18 @@ The same changes must be made on the host machine's <robot_type>.properties.urdf
 ### 2. Visualize the newly created URDF
 #### 2.1 Publish the URDF from the robot computer:
 
-    ros2 launch linorobot2_description description.launch.py
+    ros2 launch rens_description description.launch.py
 
 Optional parameters for simulation on host machine:
 - **rviz** - Set to true to visualize the robot in rviz2 and only if you're configuring the URDF from the host machine. For example:
 
-        ros2 launch linorobot2_description description.launch.py rviz:=true
+        ros2 launch rens_description description.launch.py rviz:=true
 
 #### 2.2 Visualize the robot from the host machine:
 
 The `rviz` argument on description.launch.py won't work on headless setup but you can visualize the robot remotely from the host machine:
 
-    ros2 launch linorobot2_viz robot_model.launch.py
+    ros2 launch rens_viz robot_model.launch.py
 
 ## Quickstart
 All commands below are to be run on the robot computer unless you're running a simulation or rviz2 to visualize the robot remotely from the host machine. SLAM and Navigation launch files are the same for both real and simulated robots in Gazebo.
@@ -169,19 +169,19 @@ All commands below are to be run on the robot computer unless you're running a s
 
 #### 1.1a Using a real robot:
 
-    ros2 launch linorobot2_bringup bringup.launch.py
+    ros2 launch rens_bringup bringup.launch.py
 
 Optional parameters:
 - **base_serial_port** - Serial port of the robot's microcontroller. The assumed value is `/dev/ttyACM0`. Otherwise, change the default value to the correct serial port. For example:
     
     ```
-    ros2 launch linorobot2_bringup bringup.launch.py base_serial_port:=/dev/ttyACM1
+    ros2 launch rens_bringup bringup.launch.py base_serial_port:=/dev/ttyACM1
     ```
 
 - **micro_ros_baudrate** - micro-ROS serial baudrate. default 115200.
 
     ```
-    ros2 launch linorobot2_bringup bringup.launch.py base_serial_port:=/dev/ttyUSB0 micro_ros_baudrate:=921600
+    ros2 launch rens_bringup bringup.launch.py base_serial_port:=/dev/ttyUSB0 micro_ros_baudrate:=921600
     ```
 
 - **micro_ros_transport** - micro-ROS transport. default serial.
@@ -189,16 +189,16 @@ Optional parameters:
 
     ```
     # use micro-ROS wifi transport
-    ros2 launch linorobot2_bringup bringup.launch.py micro_ros_transport:=udp4 micro_ros_port:=8888
+    ros2 launch rens_bringup bringup.launch.py micro_ros_transport:=udp4 micro_ros_port:=8888
     ```
 
 - **madgwick** - Set to true to enable magnetometer support. The madgwick filter will fuse imu/data_raw and imu/mag to imu/data. You may visualize the IMU and manetometer by [enable the IMU and magetometer plug-ins](https://automaticaddison.com/how-to-publish-imu-data-using-ros-and-the-bno055-imu-sensor/) in RVIZ2. The ekf filter configuration will need update, as only 'vyaw' is enabled in the default configuration. Both IMU and magnetometer must be calibrated, otherwise the robot's pose will rotate.
 
     ```
     # enable magnetometer support
-    ros2 launch linorobot2_bringup bringup.launch.py madgwick:=true orientation_stddev:=0.01
+    ros2 launch rens_bringup bringup.launch.py madgwick:=true orientation_stddev:=0.01
 
-    linorobot2_ws/src/linorobot2/linorobot2_base/config/ekf.yaml
+    rens_ws/src/rens/rens_base/config/ekf.yaml
         imu0: imu/data
         imu0_config: [false, false, false,
                       false, false, true,
@@ -218,9 +218,9 @@ The agent needs a few seconds to get reconnected (less than 30 seconds). Unplug 
 
 #### 1.1b Using Gazebo:
     
-    ros2 launch linorobot2_gazebo gazebo.launch.py
+    ros2 launch rens_gazebo gazebo.launch.py
 
-linorobot2_bringup.launch.py or gazebo.launch.py must always be run on a separate terminal before creating a map or robot navigation when working on a real robot or gazebo simulation respectively.
+rens_bringup.launch.py or gazebo.launch.py must always be run on a separate terminal before creating a map or robot navigation when working on a real robot or gazebo simulation respectively.
 
 #### 1.1c Using Gazebo simulation in a Docker container:
 
@@ -296,7 +296,7 @@ Press:
 #### 2.2 Joystick
 Pass `joy` argument to the launch file and set it to true to enable the joystick. For example:
 
-    ros2 launch linorobot2_bringup bringup.launch.py joy:=true
+    ros2 launch rens_bringup bringup.launch.py joy:=true
 
 - On F710 Gamepad, the top switch should be set to 'X' and the 'MODE' LED should be off.
 
@@ -311,13 +311,13 @@ Press Button/Move Joystick:
 #### 3.1 Run [SLAM Toolbox](https://github.com/SteveMacenski/slam_toolbox):
 
 
-    ros2 launch linorobot2_navigation slam.launch.py
+    ros2 launch rens_navigation slam.launch.py
 
 Optional parameters for simulation on host machine:
 
 For example:
 
-    ros2 launch linorobot2_navigation slam.launch.py rviz:=true sim:=true
+    ros2 launch rens_navigation slam.launch.py rviz:=true sim:=true
 
 - **sim** - Set to true for simulated robots on the host machine. Default value is false.
 - **rviz** - Set to true to visualize the robot in RVIZ. Default value is false.
@@ -325,7 +325,7 @@ For example:
 #### 3.1 Run rviz2 to visualize the robot from host machine:
 The `rviz` argument on slam.launch.py won't work on headless setup but you can visualize the robot remotely from the host machine:
 
-    ros2 launch linorobot2_viz slam.launch.py
+    ros2 launch rens_viz slam.launch.py
 
 #### 3.2 Move the robot to start mapping
 
@@ -333,26 +333,26 @@ Drive the robot manually until the robot has fully covered its area of operation
 
 #### 3.3 Save the map
 
-    cd linorobot2/linorobot2_navigation/maps
+    cd rens/rens_navigation/maps
     ros2 run nav2_map_server map_saver_cli -f <map_name> --ros-args -p save_map_timeout:=10000.
 
 ### 4. Autonomous Navigation
 
 #### 4.1 Load the map you created:
 
-Open linorobot2/linorobot2_navigation/launch/navigation.launch.py and change *MAP_NAME* to the name of the newly created map. Build the robot computer's workspace once done:
+Open rens/rens_navigation/launch/navigation.launch.py and change *MAP_NAME* to the name of the newly created map. Build the robot computer's workspace once done:
     
     cd <robot_computer_ws>
     colcon build
 
 Alternatively, `map` argument can be used when launching Nav2 (next step) to dynamically load map files. For example:
 
-    ros2 launch linorobot2_navigation navigation.launch.py map:=<path_to_map_file>/<map_name>.yaml
+    ros2 launch rens_navigation navigation.launch.py map:=<path_to_map_file>/<map_name>.yaml
 
 
 #### 4.2 Run [Nav2](https://docs.nav2.org/tutorials/docs/navigation2_on_real_turtlebot3.html) package:
 
-    ros2 launch linorobot2_navigation navigation.launch.py
+    ros2 launch rens_navigation navigation.launch.py
 
 Optional parameter for loading maps:
 - **map** - Path to newly created map <map_name.yaml>.
@@ -364,7 +364,7 @@ Optional parameters for simulation on host machine:
 #### 4.3 Run rviz2 to visualize the robot from host machine:
 The `rviz` argument for navigation.launch.py won't work on headless setup but you can visualize the robot remotely from the host machine:
 
-    ros2 launch linorobot2_viz navigation.launch.py
+    ros2 launch rens_viz navigation.launch.py
 
 Check out Nav2 [tutorial](https://docs.nav2.org/tutorials/docs/navigation2_on_real_turtlebot3.html#initialize-the-location-of-turtlebot-3) for more details on how to initialize and send goal pose. 
 
@@ -383,7 +383,7 @@ navigation.launch.py will continue to throw this error `Timed out waiting for tr
     ```
 
 #### 2. [`slam_toolbox]: Message Filter dropping message: frame 'laser'`
-- Try to up `transform_timeout` by 0.1 in linorobot2_navigation/config/slam.yaml until the warning is gone.
+- Try to up `transform_timeout` by 0.1 in rens_navigation/config/slam.yaml until the warning is gone.
 
 
 #### 3. `target_frame - frame does not exist`

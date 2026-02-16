@@ -214,10 +214,10 @@ if [ "$*" == "" ]
     then
         echo "No arguments provided"
         echo
-        echo "Example: $ bash install_linorobot2.bash 2wd a1"
-        echo "Example: $ bash install_linorobot2.bash 2wd a1 realsense"
-        echo "Example: $ bash install_linorobot2.bash 2wd - realsense"
-        echo "Example: $ bash install_linorobot2.bash 2wd"
+        echo "Example: $ bash install_rens.bash 2wd a1"
+        echo "Example: $ bash install_rens.bash 2wd a1 realsense"
+        echo "Example: $ bash install_rens.bash 2wd - realsense"
+        echo "Example: $ bash install_rens.bash 2wd"
 
         echo
         exit 1
@@ -235,7 +235,7 @@ fi
 
 if [[ "$BASE" != "ci" && "$LASER_SENSOR" != "" && "$LASER_SENSOR" != "-" ]] && !(printf '%s\n' "${LASER_SENSOR_ARRAY[@]}" | grep -xq $LASER_SENSOR)
     then
-        echo "Invalid linorobot2 laser sensor: $LASER_SENSOR"
+        echo "Invalid rens laser sensor: $LASER_SENSOR"
         echo
         echo "Valid Options:"
         for key in "${!LASER_SENSOR_ARRAY[@]}"; do echo "${LASER_SENSOR_ARRAY[$key]}"; done
@@ -245,7 +245,7 @@ fi
 
 if [[ "$BASE" != "ci" && "$DEPTH_SENSOR" != "" ]] && !(printf '%s\n' "${DEPTH_SENSOR_ARRAY[@]}" | grep -xq $DEPTH_SENSOR)
     then
-        echo "Invalid linorobot2 depth sensor: $DEPTH_SENSOR"
+        echo "Invalid rens depth sensor: $DEPTH_SENSOR"
         echo
         echo "Valid Options:"
         for key in "${!DEPTH_SENSOR_ARRAY[@]}"; do echo "${DEPTH_SENSOR_ARRAY[$key]}"; done
@@ -256,7 +256,7 @@ fi
 if [[ "$BASE" != "ci" ]]
     then
         echo
-        echo "You are installing linorobot2 on your robot computer."
+        echo "You are installing rens on your robot computer."
         echo
         echo "===========SUMMARY============"
         echo "ROBOT TYPE   : $BASE"
@@ -265,7 +265,7 @@ if [[ "$BASE" != "ci" ]]
         echo
         echo "This installer will edit your ~/.bashrc."
         echo "Create a rens_ws on your $HOME directory."
-        echo "Install linorobot2 ROS2 dependencies."
+        echo "Install rens ROS2 dependencies."
         echo "Install udev rules on /etc/udev/rules.d folder."
         echo -n "Enter [y] to continue. " 
         read reply
@@ -318,15 +318,15 @@ ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
 source $WORKSPACE/install/setup.bash
 
-#### 2.1 Download linorobot2:
+#### 2.1 Download rens:
 cd $WORKSPACE
-git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/linorobot2
+git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/rens
 
 #### 2.2 Ignore Gazebo Packages on robot computer (optional)
-cd $WORKSPACE/src/linorobot2/linorobot2_gazebo
+cd $WORKSPACE/src/rens/rens_gazebo
 touch COLCON_IGNORE
 
-#### 2.3 Install linorobot2 package:
+#### 2.3 Install rens package:
 cd $WORKSPACE
 rosdep update && rosdep install --from-path src --ignore-src -y --skip-keys microxrcedds_agent
 colcon build

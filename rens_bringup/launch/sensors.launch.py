@@ -27,7 +27,7 @@ def generate_launch_description():
     depth_sensor_name = os.getenv('RENS2_DEPTH_SENSOR', '')
     
     fake_laser_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'config', 'fake_laser.yaml']
+        [FindPackageShare('rens_bringup'), 'config', 'fake_laser.yaml']
     )
 
     #indices
@@ -60,11 +60,11 @@ def generate_launch_description():
     }
 
     laser_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'lasers.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'lasers.launch.py']
     )
 
     depth_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_bringup'), 'launch', 'depth.launch.py']
+        [FindPackageShare('rens_bringup'), 'launch', 'depth.launch.py']
     )
 
     return LaunchDescription([

@@ -32,20 +32,20 @@ def generate_launch_description():
     )
 
     ekf_config_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_base"), "config", "ekf.yaml"]
+        [FindPackageShare("rens_base"), "config", "ekf.yaml"]
     )
 
     robot_base = os.getenv('RENS2_BASE')
     urdf_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_description"), "urdf/robots", f"{robot_base}.urdf.xacro"]
+        [FindPackageShare("rens_description"), "urdf/robots", f"{robot_base}.urdf.xacro"]
     )
     
     world_path = PathJoinSubstitution(
-        [FindPackageShare("linorobot2_gazebo"), "worlds", "turtlebot3_world.sdf"]
+        [FindPackageShare("rens_gazebo"), "worlds", "turtlebot3_world.sdf"]
     )
 
     description_launch_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
+        [FindPackageShare('rens_description'), 'launch', 'description.launch.py']
     )
 
     return LaunchDescription([
@@ -118,7 +118,7 @@ def generate_launch_description():
             output='screen',
             arguments=[
                 '-topic', 'robot_description', 
-                '-entity', 'linorobot2', 
+                '-entity', 'rens', 
                 '-x', LaunchConfiguration('spawn_x'),
                 '-y', LaunchConfiguration('spawn_y'),
                 '-z', LaunchConfiguration('spawn_z'),
@@ -150,7 +150,7 @@ def generate_launch_description():
         ),
 
         Node(
-            package='linorobot2_gazebo',
+            package='rens_gazebo',
             executable='command_timeout',
             name='command_timeout'
         ),

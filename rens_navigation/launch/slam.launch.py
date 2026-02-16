@@ -30,7 +30,7 @@ def generate_launch_description():
     )
 
     slam_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'config', 'slam.yaml']
+        [FindPackageShare('rens_navigation'), 'config', 'slam.yaml']
     )
 
     navigation_launch_path = PathJoinSubstitution(
@@ -38,11 +38,11 @@ def generate_launch_description():
     )
 
     nav2_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'config', 'navigation.yaml']    
+        [FindPackageShare('rens_navigation'), 'config', 'navigation.yaml']    
     )
 
     rviz_config_path = PathJoinSubstitution(
-        [FindPackageShare('linorobot2_navigation'), 'rviz', 'linorobot2_slam.rviz']
+        [FindPackageShare('rens_navigation'), 'rviz', 'rens_slam.rviz']
     )
     
     lc = LaunchContext()

@@ -340,12 +340,12 @@ if [[ "$BASE" != "ci" ]]
         ### 2. Sensors
         if [[ "$LASER_SENSOR" != "-" ||  "$LASER_SENSOR" != "" ]]
             then
-                echo "export RENS2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
+                echo "export RENS_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
         fi
 
         if [[ "$DEPTH_SENSOR" != "-" ||  "$DEPTH_SENSOR" != "" ]]
             then
-            echo "export RENS2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
+            echo "export RENS_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
         fi
         echo
         echo "Do you want to add sourcing of rens_ws on your ~/.bashrc?"

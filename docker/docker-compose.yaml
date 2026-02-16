@@ -27,8 +27,8 @@ services:
     environment:
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
       - RENS_BASE=${ROBOT_BASE} 
-      - RENS2_LASER_SENSOR=${LASER_SENSOR} 
-      - RENS2_DEPTH_SENSOR=${DEPTH_SENSOR} 
+      - RENS_LASER_SENSOR=${LASER_SENSOR} 
+      - RENS_DEPTH_SENSOR=${DEPTH_SENSOR} 
       - DISPLAY=${DISPLAY} 
       - QT_X11_NO_MITSHM=1
       - WORLD=${WORLD:-playground}

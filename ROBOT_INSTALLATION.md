@@ -123,7 +123,7 @@ Set RENS_BASE env variable to the type of robot base that you want to use. This 
 
 ### 2. Sensors
 #### 2.1 Depth Sensor (Optional)
-The Nav2 config file has been configured to support [Voxel Layer](https://navigation.ros.org/configuration/packages/costmap-plugins/voxel.html) for marking 3D obstacles in the Local Costmap using a depth sensor. To enable one of the tested depth sensor's launch files in bringup.launch.py, export the depth sensor you're using to `RENS2_DEPTH_SENSOR` env variable.
+The Nav2 config file has been configured to support [Voxel Layer](https://navigation.ros.org/configuration/packages/costmap-plugins/voxel.html) for marking 3D obstacles in the Local Costmap using a depth sensor. To enable one of the tested depth sensor's launch files in bringup.launch.py, export the depth sensor you're using to `RENS_DEPTH_SENSOR` env variable.
 
 Tested sensors are:
 - `realsense` - [Intel RealSense](https://www.intelrealsense.com/stereo-depth/) D435, D435i
@@ -135,10 +135,10 @@ Tested sensors are:
 
 For example:
 
-    echo "export RENS2_DEPTH_SENSOR=realsense" >> ~/.bashrc
+    echo "export RENS_DEPTH_SENSOR=realsense" >> ~/.bashrc
 
 #### 2.2 Laser Sensor (Optional)
-The launch files of the tested laser sensors have already been added in bringup.launch.py. You can enable one of these sensors by exporting the laser sensor you're using to `RENS2_LASER_SENSOR` env variable.
+The launch files of the tested laser sensors have already been added in bringup.launch.py. You can enable one of these sensors by exporting the laser sensor you're using to `RENS_LASER_SENSOR` env variable.
 
 Tested Laser Sensors:
 - `rplidar` - [RP LIDAR A1](https://www.slamtec.com/en/Lidar/A1)
@@ -156,9 +156,9 @@ Tested Laser Sensors:
 
 For example:
 
-    echo "export RENS2_LASER_SENSOR=rplidar" >> ~/.bashrc
+    echo "export RENS_LASER_SENSOR=rplidar" >> ~/.bashrc
 
-If you export a depth sensor to `RENS2_LASER_SENSOR`, the launch file will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser.
+If you export a depth sensor to `RENS_LASER_SENSOR`, the launch file will run [depthimage_to_laserscan](https://github.com/ros-perception/depthimage_to_laserscan) to convert the depth sensor's depth image to laser.
 
 ### 3. Save changes
 Source your `~/.bashrc` to apply the changes you made:
@@ -194,7 +194,7 @@ and paste the following:
     #!/bin/sh
 
     export RENS_BASE=<your_robot_type>
-    export RENS2_LASER_SENSOR=<your_supported_sensor> #(optional)
+    export RENS_LASER_SENSOR=<your_supported_sensor> #(optional)
 
 ### 2.2 Create systemd service
 

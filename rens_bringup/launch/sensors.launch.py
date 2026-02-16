@@ -23,8 +23,8 @@ from launch_ros.actions import Node, SetRemap
 
 
 def generate_launch_description():
-    laser_sensor_name = os.getenv('RENS2_LASER_SENSOR', '')
-    depth_sensor_name = os.getenv('RENS2_DEPTH_SENSOR', '')
+    laser_sensor_name = os.getenv('RENS_LASER_SENSOR', '')
+    depth_sensor_name = os.getenv('RENS_DEPTH_SENSOR', '')
     
     fake_laser_config_path = PathJoinSubstitution(
         [FindPackageShare('rens_bringup'), 'config', 'fake_laser.yaml']

@@ -14,7 +14,7 @@ Assuming you're using one of the tested sensors, linorobot2 automatically launch
 The image below summarizes the topics available after running **bringup.launch.py**.
 ![linorobot2_microcontroller](docs/microcontroller_architecture.png)
 
-An in-depth tutorial on how to build the robot is available in [linorobot2_hardware](https://github.com/linorobot/linorobot2_hardware).
+An in-depth tutorial on how to build the robot is available in [linorobot2_hardware](https://github.com/AvansTI/rens_hardware).
 
 ## Installation 
 This package requires ros-jazzy. If you haven't installed ROS2 yet, you can use this [installer](https://github.com/linorobot/ros2me) script that has been tested to work on x86 and ARM based dev boards ie. Raspberry Pi4/Nvidia Jetson Series. 
@@ -75,7 +75,7 @@ This step is only required if you plan to use Gazebo later. This comes in handy 
 Install linorobot2 package on the host machine:
 
     cd <host_machine_ws>
-    git clone -b $ROS_DISTRO https://github.com/linorobot/linorobot2 src/linorobot2
+    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/linorobot2
     rosdep update && rosdep install --from-path src --ignore-src -y --skip-keys microxrcedds_agent --skip-keys micro_ros_agent
     colcon build
     source install/setup.bash

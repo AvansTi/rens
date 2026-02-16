@@ -97,7 +97,7 @@ OAK-D Camera:
 #### 2.1 Download linorobot2:
 
     cd <your_ws> 
-    git clone -b $ROS_DISTRO https://github.com/linorobot/linorobot2 src/linorobot2
+    git clone -b $ROS_DISTRO https://github.com/AvansTI/rens src/linorobot2
 
 #### 2.2 Ignore Gazebo Packages on robot computer (optional)
 

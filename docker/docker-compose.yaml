@@ -26,7 +26,7 @@ services:
     privileged: true
     environment:
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
-      - RENS2_BASE=${ROBOT_BASE} 
+      - RENS_BASE=${ROBOT_BASE} 
       - RENS2_LASER_SENSOR=${LASER_SENSOR} 
       - RENS2_DEPTH_SENSOR=${DEPTH_SENSOR} 
       - DISPLAY=${DISPLAY} 

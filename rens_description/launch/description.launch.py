@@ -22,7 +22,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
-    robot_base = os.getenv('RENS2_BASE')
+    robot_base = os.getenv('RENS_BASE')
 
     urdf_path = PathJoinSubstitution(
         [FindPackageShare("rens_description"), "urdf/robots", f"{robot_base}.urdf.xacro"]

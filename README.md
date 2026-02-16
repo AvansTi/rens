@@ -83,9 +83,9 @@ Install rens package on the host machine:
 * microxrcedds_agent and micro_ros_agent dependency checks are skipped to prevent this [issue](https://github.com/micro-ROS/micro_ros_setup/issues/138) of finding its keys. This means that you have to always add `--skip-keys microxrcedds_agent --skip-keys micro_ros_agent` whenever you have to run `rosdep install` on the ROS2 workspace where you installed rens. 
 
 #### 2.2 Define Robot Type
-Set RENS2_BASE env variable to the type of robot base used. Available env variables are *2wd*, *4wd*, and *mecanum*. For example:
+Set RENS_BASE env variable to the type of robot base used. Available env variables are *2wd*, *4wd*, and *mecanum*. For example:
 
-    echo "export RENS2_BASE=2wd" >> ~/.bashrc
+    echo "export RENS_BASE=2wd" >> ~/.bashrc
     source ~/.bashrc
 
 You can skip the next step (Host Machine - RVIZ Configurations) since this package already contains the same RVIZ configurations to visualize the robot. 

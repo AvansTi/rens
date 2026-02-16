@@ -336,7 +336,7 @@ source $WORKSPACE/install/setup.bash
 if [[ "$BASE" != "ci" ]]
     then
         ### 1. Robot Type
-        echo "export RENS2_BASE=$BASE" >> ~/.bashrc
+        echo "export RENS_BASE=$BASE" >> ~/.bashrc
         ### 2. Sensors
         if [[ "$LASER_SENSOR" != "-" ||  "$LASER_SENSOR" != "" ]]
             then

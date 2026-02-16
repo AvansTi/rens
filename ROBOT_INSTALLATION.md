@@ -117,9 +117,9 @@ If you're installing this on the robot's computer or you don't need to run Gazeb
 
 ## ENV Variables
 ### 1. Robot Type
-Set RENS2_BASE env variable to the type of robot base that you want to use. This is not required if you're using a custom URDF. Available env variables are *2wd*, *4wd*, and *mecanum*. For example:
+Set RENS_BASE env variable to the type of robot base that you want to use. This is not required if you're using a custom URDF. Available env variables are *2wd*, *4wd*, and *mecanum*. For example:
 
-    echo "export RENS2_BASE=2wd" >> ~/.bashrc
+    echo "export RENS_BASE=2wd" >> ~/.bashrc
 
 ### 2. Sensors
 #### 2.1 Depth Sensor (Optional)
@@ -193,7 +193,7 @@ and paste the following:
 
     #!/bin/sh
 
-    export RENS2_BASE=<your_robot_type>
+    export RENS_BASE=<your_robot_type>
     export RENS2_LASER_SENSOR=<your_supported_sensor> #(optional)
 
 ### 2.2 Create systemd service

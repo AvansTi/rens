@@ -5,7 +5,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
-    robot_base = os.getenv('LINOROBOT2_BASE')
+    robot_base = os.getenv('RENS2_BASE')
 
     package_name = 'linorobot2_description'
 

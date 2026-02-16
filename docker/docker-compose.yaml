@@ -26,9 +26,9 @@ services:
     privileged: true
     environment:
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID}
-      - LINOROBOT2_BASE=${ROBOT_BASE} 
-      - LINOROBOT2_LASER_SENSOR=${LASER_SENSOR} 
-      - LINOROBOT2_DEPTH_SENSOR=${DEPTH_SENSOR} 
+      - RENS2_BASE=${ROBOT_BASE} 
+      - RENS2_LASER_SENSOR=${LASER_SENSOR} 
+      - RENS2_DEPTH_SENSOR=${DEPTH_SENSOR} 
       - DISPLAY=${DISPLAY} 
       - QT_X11_NO_MITSHM=1
       - WORLD=${WORLD:-playground}

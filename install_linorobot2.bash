@@ -336,16 +336,16 @@ source $WORKSPACE/install/setup.bash
 if [[ "$BASE" != "ci" ]]
     then
         ### 1. Robot Type
-        echo "export LINOROBOT2_BASE=$BASE" >> ~/.bashrc
+        echo "export RENS2_BASE=$BASE" >> ~/.bashrc
         ### 2. Sensors
         if [[ "$LASER_SENSOR" != "-" ||  "$LASER_SENSOR" != "" ]]
             then
-                echo "export LINOROBOT2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
+                echo "export RENS2_LASER_SENSOR=$LASER_SENSOR" >> ~/.bashrc
         fi
 
         if [[ "$DEPTH_SENSOR" != "-" ||  "$DEPTH_SENSOR" != "" ]]
             then
-            echo "export LINOROBOT2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
+            echo "export RENS2_DEPTH_SENSOR=$DEPTH_SENSOR" >> ~/.bashrc
         fi
         echo
         echo "Do you want to add sourcing of rens_ws on your ~/.bashrc?"

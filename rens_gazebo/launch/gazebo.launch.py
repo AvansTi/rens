@@ -35,7 +35,7 @@ def generate_launch_description():
         [FindPackageShare("linorobot2_base"), "config", "ekf.yaml"]
     )
 
-    robot_base = os.getenv('LINOROBOT2_BASE')
+    robot_base = os.getenv('RENS2_BASE')
     urdf_path = PathJoinSubstitution(
         [FindPackageShare("linorobot2_description"), "urdf/robots", f"{robot_base}.urdf.xacro"]
     )

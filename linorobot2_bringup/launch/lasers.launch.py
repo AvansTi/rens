@@ -93,7 +93,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             name='lidar_serial_port',
-            default_value='/dev/ttyUSB0',
+            default_value='/dev/rplidar',
             description='Lidar serial port device name'
         ),
 
@@ -180,7 +180,7 @@ def generate_launch_description():
             name='ldlidar',
             output='screen',
             parameters=[
-                {'serial_port': '/dev/ttyUSB0'},
+                {'serial_port': '/dev/ldlidar'},
                 {'topic_name': LaunchConfiguration('topic_name')},
                 {'lidar_frame': LaunchConfiguration('frame_id')},
                 {'range_threshold': 0.005}

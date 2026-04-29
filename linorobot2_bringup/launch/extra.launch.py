@@ -37,7 +37,7 @@ def generate_launch_description():
             name='ldlidar',
             output='screen',
             parameters=[
-                {'serial_port': '/dev/ttyUSB1'},
+                {'serial_port': '/dev/rplidar'},
                 {'topic_name': '/base/scan/unfiltered'},
                 {'lidar_frame': 'base_laser'},
                 {'range_threshold': 0.005}

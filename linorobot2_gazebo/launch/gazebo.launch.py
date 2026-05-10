@@ -48,6 +48,12 @@ def generate_launch_description():
         [FindPackageShare('linorobot2_description'), 'launch', 'description.launch.py']
     )
 
+    lidar_filter_file = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_bringup'),
+        'config',
+        'lidar_filters.yaml']
+    )
+
     return LaunchDescription([
         DeclareLaunchArgument(
             name='gui', 
@@ -135,7 +141,8 @@ def generate_launch_description():
                 "/odom/unfiltered@nav_msgs/msg/Odometry[gz.msgs.Odometry",
                 "/imu/data@sensor_msgs/msg/Imu[gz.msgs.IMU",
                 "/joint_states@sensor_msgs/msg/JointState[gz.msgs.Model",
-                "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+                "/scan_unfiltered@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
+                # "/scan_gz@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
                 "/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo",
                 "/camera/image@sensor_msgs/msg/Image[gz.msgs.Image",
                 "/camera/depth_image@sensor_msgs/msg/Image[gz.msgs.Image",
@@ -146,6 +153,18 @@ def generate_launch_description():
                 ('/camera/image', '/camera/color/image_raw'),
                 ('/camera/depth_image', '/camera/depth/image_rect_raw'),
                 ('/camera/points', '/camera/depth/color/points'),
+            ]
+        ),
+
+        Node(
+            package='laser_filters',
+            executable='scan_to_scan_filter_chain',
+            output='screen',
+            parameters=[lidar_filter_file],
+            # Remap input from '/scan_unfiltered' to '/scan' and output from '/scan_filtered' to '/scan'
+            remappings=[
+                ('/scan', '/scan_unfiltered'),
+                ('/scan_filtered', '/scan'),
             ]
         ),
 

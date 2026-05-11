@@ -100,10 +100,10 @@ function install_stl27l {
 
 function install_sllidar_ros2 {
     cd $WORKSPACE
-    git clone https://github.com/Slamtec/sllidar_ros2.git
+    git clone https://github.com/AvansTi/rens_sllidar_ros2.git
     colcon build
     source $WORKSPACE/install/setup.bash
-    sudo cp sllidar_ros2/scripts/rplidar.rules /etc/udev/rules.d
+    sudo cp rens_sllidar_ros2/scripts/rplidar.rules /etc/udev/rules.d
 }
 
 function install_a1 {

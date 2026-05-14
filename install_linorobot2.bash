@@ -327,7 +327,7 @@ cd $WORKSPACE
 git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens_open_manipulator.git src/rens_open_manipulator
 
 #### 2.3 Ignore Gazebo Packages on robot computer (optional)
-cd $WORKSPACE/src/linorobot2/linorobot2_gazebo
+cd $WORKSPACE/src/rens/linorobot2_gazebo
 touch COLCON_IGNORE
 
 #### 2.4 Install linorobot2 package:

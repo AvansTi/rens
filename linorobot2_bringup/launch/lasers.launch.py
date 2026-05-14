@@ -65,6 +65,12 @@ def generate_launch_description():
         's3',
     ]
 
+    lidar_filter_file = PathJoinSubstitution(
+        [FindPackageShare('linorobot2_bringup'),
+        'config',
+        'lidar_filters.yaml']
+    )    
+
     return LaunchDescription([
         DeclareLaunchArgument(
             name='sensor', 
@@ -75,7 +81,7 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             name='topic_name', 
-            default_value='scan',
+            default_value='scan_unfiltered',
             description='Laser Topic Name'
         ),
 
@@ -255,6 +261,19 @@ def generate_launch_description():
                 {'angle_crop_max': 225.0}
             ]
         ),
+
+        Node(
+            package='laser_filters',
+            executable='scan_to_scan_filter_chain',
+            output='screen',
+            parameters=[lidar_filter_file],
+            # Remap input from '/scan_unfiltered' to '/scan' and output from '/scan_filtered' to '/scan'
+            remappings=[
+                ('/scan', '/scan_unfiltered'),
+                ('/scan_filtered', '/scan')
+            ]
+        ),
+
         OpaqueFunction(function=launch_rplidar)
     ])
 

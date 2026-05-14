@@ -100,7 +100,7 @@ function install_stl27l {
 
 function install_sllidar_ros2 {
     cd $WORKSPACE
-    git clone https://github.com/AvansTi/rens_sllidar_ros2.git src/rens_sslidar_ros2
+    git clone https://github.com/AvansTi/rens_sllidar_ros2.git src/rens_sllidar_ros2
     colcon build
     source $WORKSPACE/install/setup.bash
     sudo cp src/rens_sllidar_ros2/scripts/rplidar.rules /etc/udev/rules.d

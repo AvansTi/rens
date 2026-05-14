@@ -100,10 +100,10 @@ function install_stl27l {
 
 function install_sllidar_ros2 {
     cd $WORKSPACE
-    git clone https://github.com/Slamtec/sllidar_ros2.git
+    git clone https://github.com/AvansTi/rens_sllidar_ros2.git src/rens_sslidar_ros2
     colcon build
     source $WORKSPACE/install/setup.bash
-    sudo cp sllidar_ros2/scripts/rplidar.rules /etc/udev/rules.d
+    sudo cp src/rens_sllidar_ros2/scripts/rplidar.rules /etc/udev/rules.d
 }
 
 function install_a1 {
@@ -320,13 +320,17 @@ source $WORKSPACE/install/setup.bash
 
 #### 2.1 Download linorobot2:
 cd $WORKSPACE
-git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/linorobot2
+git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/rens
 
-#### 2.2 Ignore Gazebo Packages on robot computer (optional)
+#### 2.2 Download OpenManipulator   :
+cd $WORKSPACE
+git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens_open_manipulator.git src/rens_open_manipulator
+
+#### 2.3 Ignore Gazebo Packages on robot computer (optional)
 cd $WORKSPACE/src/linorobot2/linorobot2_gazebo
 touch COLCON_IGNORE
 
-#### 2.3 Install linorobot2 package:
+#### 2.4 Install linorobot2 package:
 cd $WORKSPACE
 rosdep update && rosdep install --from-path src --ignore-src -y --skip-keys microxrcedds_agent
 colcon build

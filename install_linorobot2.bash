@@ -325,6 +325,8 @@ git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens.git src/rens
 #### 2.2 Download OpenManipulator   :
 cd $WORKSPACE
 git clone -b ${ROS_DISTRO}_rens https://github.com/AvansTi/rens_open_manipulator.git src/rens_open_manipulator
+sudo cp src/rens_open_manipulator/open_manipulator_bringup/open-manipulator-cdc.rules /etc/udev/rules.d
+
 
 #### 2.3 Ignore Gazebo Packages on robot computer (optional)
 cd $WORKSPACE/src/rens/linorobot2_gazebo

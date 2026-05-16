@@ -288,6 +288,8 @@ source /opt/ros/$ROS_DISTRO/setup.bash
 cd $WORKSPACE
 colcon build
 source $WORKSPACE/install/setup.bash
+sudo rosdep init
+rosdep update
 
 #### 1.2/1.3 Install LIDAR/Depth Sensor ROS2 drivers:
 if (printf '%s\n' "${LASER_SENSOR_ARRAY[@]}" | grep -xq $LASER_SENSOR)
@@ -306,6 +308,8 @@ if [[ "$BASE" == "ci" ]]
 fi
 
 #### 1.4 Download and install micro-ROS:
+echo "Installing MicroROS"
+echo
 mkdir -p $UROS_WORKSPACE
 cd $UROS_WORKSPACE
 git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
@@ -316,6 +320,8 @@ colcon build
 source $UROS_WORKSPACE/install/setup.bash
 
 #### 1.5 Setup micro-ROS agent:
+echo "Installing MicroROS agent"
+echo
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
 source $UROS_WORKSPACE/install/setup.bash

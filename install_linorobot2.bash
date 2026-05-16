@@ -21,6 +21,7 @@ LASER_SENSOR=$2
 DEPTH_SENSOR=$3
 ARCH="$(uname -m)"
 WORKSPACE="$HOME/rens_ws"
+UROS_WORKSPACE="$HOME/uros_ws"
 
 ROBOT_TYPE_ARRAY=(2wd 4wd mecanum)
 DEPTH_SENSOR_ARRAY=(realsense zed zedm zed2 zed2i oakd oakdlite oakdpro)
@@ -305,18 +306,19 @@ if [[ "$BASE" == "ci" ]]
 fi
 
 #### 1.4 Download and install micro-ROS:
-cd $WORKSPACE
+mkdir -p $UROS_WORKSPACE
+cd $UROS_WORKSPACE
 git clone -b $ROS_DISTRO https://github.com/micro-ROS/micro_ros_setup.git src/micro_ros_setup
 sudo apt install -y python3-vcstool build-essential
 sudo apt update && rosdep update
 rosdep install --from-path src --ignore-src -y
 colcon build
-source $WORKSPACE/install/setup.bash
+source $UROS_WORKSPACE/install/setup.bash
 
 #### 1.5 Setup micro-ROS agent:
 ros2 run micro_ros_setup create_agent_ws.sh
 ros2 run micro_ros_setup build_agent.sh
-source $WORKSPACE/install/setup.bash
+source $UROS_WORKSPACE/install/setup.bash
 
 #### 2.1 Download linorobot2:
 cd $WORKSPACE
@@ -359,6 +361,7 @@ if [[ "$BASE" != "ci" ]]
         read reply
         if [[ "$reply" == "y" || "$reply" == "Y" ]]
             then
+                echo "source ${UROS_WORKSPACE}/install/setup.bash" >> ~/.bashrc
                 echo "source ${WORKSPACE}/install/setup.bash" >> ~/.bashrc
         else
             echo

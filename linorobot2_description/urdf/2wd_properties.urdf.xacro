@@ -23,7 +23,10 @@
   <!-- <xacro:property name="wheel_mesh_file" value="file://$(find linorobot2_description)/meshes/tire.dae" /> -->
   
   <xacro:property name="laser_pose">
+<!-- Use this if your lidar's front is facing the rear:
     <origin xyz="0 0 0.08" rpy="0 0 ${pi}"/>
+-->    
+    <origin xyz="0 0 0.08" rpy="0 0 0"/>
   </xacro:property>
 
   <xacro:property name="depth_sensor_pose">

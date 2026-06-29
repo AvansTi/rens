@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<robot name="linorobot2_2wd" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="$(arg robot_name)">
+  <xacro:arg name="robot_name" default="linorobot2_2wd"/>
+  <xacro:property name="robot_name" value="$(arg robot_name)"/>
   <xacro:arg name="sim" default="false" />
   <xacro:include filename="$(find linorobot2_description)/urdf/2wd_properties.urdf.xacro" />
   <xacro:include filename="$(find linorobot2_description)/urdf/mech/base.urdf.xacro" />

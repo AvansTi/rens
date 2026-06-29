@@ -34,6 +34,12 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument(
+            name='robot_name', 
+            default_value="REnS",
+            description='Robot Name'
+        ),
+        
+        DeclareLaunchArgument(
             name='namespace', 
             default_value="",
             description='namespace'
@@ -83,7 +89,7 @@ def generate_launch_description():
             parameters=[
                 {
                     'use_sim_time': LaunchConfiguration('use_sim_time'),
-                    'robot_description': Command(['xacro ', LaunchConfiguration('urdf')])
+                    'robot_description': Command(['xacro ', LaunchConfiguration('urdf'), ' robot_name:=', LaunchConfiguration('robot_name')])
                 }
             ]
         ),

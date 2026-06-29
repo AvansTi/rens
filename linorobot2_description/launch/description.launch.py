@@ -34,6 +34,12 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument(
+            name='namespace', 
+            default_value="",
+            description='namespace'
+        ),
+
+        DeclareLaunchArgument(
             name='urdf', 
             default_value=urdf_path,
             description='URDF path'
@@ -61,6 +67,7 @@ def generate_launch_description():
             package='joint_state_publisher',
             executable='joint_state_publisher',
             name='joint_state_publisher',
+            namespace=LaunchConfiguration('namespace'),
             condition=IfCondition(LaunchConfiguration("publish_joints")),
             parameters=[
                 {'use_sim_time': LaunchConfiguration('use_sim_time')}
@@ -70,6 +77,7 @@ def generate_launch_description():
         Node(
             package='robot_state_publisher',
             executable='robot_state_publisher',
+            namespace=LaunchConfiguration('namespace'),
             name='robot_state_publisher',
             output='screen',
             parameters=[
@@ -84,6 +92,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
+            namespace=LaunchConfiguration('namespace'),
             output='screen',
             arguments=['-d', rviz_config_path],
             condition=IfCondition(LaunchConfiguration("rviz")),
